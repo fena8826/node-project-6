@@ -1,0 +1,44 @@
+<%- include('header') %>
+
+<div class="page-wrapper">
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-12 d-flex no-block align-items-center">
+        <h4 class="page-title">Change Password</h4>
+        <div class="ml-auto text-right">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Change Password</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height:70vh;">
+    <div class="card shadow-lg p-4" style="max-width: 500px; width: 100%; border-radius: 10px;">
+      <h3 class="text-center mb-4">Change Password</h3>
+      
+      <form action="/change-password" method="POST">
+        <div class="mb-3">
+          <label for="old_password" class="form-label">Old Password</label>
+          <input  type="password"  id="old_password"  name="old_password"  class="form-control"  placeholder="Enter old password"  required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">New Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter new password" required>
+        </div>
+        <div class="mb-3">
+          <label for="c_password" class="form-label">Confirm Password</label>
+          <input type="password" id="c_password" name="c_password" class="form-control" placeholder="Re-enter new password" required>
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary btn-block">Update Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('footer') %>

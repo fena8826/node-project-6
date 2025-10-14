@@ -1,0 +1,53 @@
+<%- include('header') %>
+
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-6 d-flex align-items-center">
+                <h4 class="page-title">My Blogs</h4>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <a href="/blog/view-all-blogs" 
+                   class="btn btn-sm" 
+                   style="background-color:#7460ee; color:#fff; border:none;">
+                   <i class="fas fa-user"></i> All Blogs
+                </a>
+            </div>
+        </div>
+
+    <div class="container-fluid">
+        <a href="/blog/add-blog" class="btn  my-3"  style="background-color:#7460ee; color:#fff; border:none;"> Add New Blog</a>
+
+        <div class="row">
+            <% if (blogs.length === 0) { %>
+                <p>No blogs found. Start writing one!</p>
+            <% } %>
+
+            <% blogs.forEach(blog => { %>
+                <div class="col-md-3 mx-3">
+                    <div class="card ">
+                        <img src="<%= blog.image %>" class="card-img-top" height="200">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= blog.title %></h5>
+                            <p class="text-muted">Category: <%= blog.category %></p>
+                            <p class="text-muted">Date: <%= new Date(blog.createdAt).toLocaleDateString() %></p>
+
+                            <!-- View -->
+                            <a href="/blog/single-blog/<%= blog._id %>" class="btn btn-info btn-sm">
+                                <i class="fas fa-eye"></i> View
+                            </a>
+                            <!-- Edit -->
+                            <a href="/blog/edit-blog/<%= blog._id %>" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                            <a href="/blog/delete-blog/<%= blog._id %>" class="btn btn-danger btn-sm" >
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+<%- include('footer') %>

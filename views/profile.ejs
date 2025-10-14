@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<style>/* General Page Styling */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Profile Container */
+    .profile-container {
+        width: 50%;
+        margin: 50px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    /* Profile Image */
+    .profile-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid #007bff;
+    }
+    
+    /* Profile Info */
+    .profile-info h2 {
+        color: #333;
+        margin-top: 10px;
+    }
+    
+    .profile-info p {
+        color: #777;
+        font-size: 16px;
+    }
+    
+    /* Buttons */
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 10px;
+        text-decoration: none;
+        color: white;
+        background: #007bff;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+    
+    .btn:hover {
+        background: #0056b3;
+    }
+    </style>
+<body>
+
+    <div class="profile-container"><img src="<%= imagePath %>" 
+        alt="Profile Image" class="profile-img">
+   
+        <div class="profile-info">
+            <h2><%= user.firstname %> <%= user.lastname %></h2>
+            <p>Email: <%= user.email %></p>
+            <p>Gender: <%= user.gender %></p>
+            <p>Hobbies: <%= user.hobbies.join(", ") %></p>
+            <a href="/dashboard" class="btn">Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+</html>

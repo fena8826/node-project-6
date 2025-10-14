@@ -1,0 +1,70 @@
+<%- include('header') %>
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Edit Blog</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Blog</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+                    <form class="form-horizontal" action="/blog/update-blog/<%= blog._id %>" method="post" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <h4 class="card-title">Blog Details</h4>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Title</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="title" value="<%= blog.title %>" placeholder="Enter Blog Title">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Content</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" name="content" rows="5" placeholder="Write your blog content here..."><%= blog.content %></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Category</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="category" value="<%= blog.category %>" placeholder="Enter Category">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Language</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="language" value="<%= blog.language %>" placeholder="Enter Language">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Upload Image</label>
+                                <div class="col-sm-9">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="image" id="validatedCustomFile">
+                                        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-top">
+                            <div class="card-body text-center">
+                                <button type="submit" class="btn btn-primary">Update Blog</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('footer') %>

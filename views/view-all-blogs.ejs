@@ -1,0 +1,53 @@
+<%- include('header') %>
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-6 d-flex align-items-center">
+                <h4 class="page-title">All Blogs</h4>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <a href="/blog/my-blogs" 
+                   class="btn btn-sm" 
+                   style="background-color:#7460ee; color:#fff; border:none;">
+                   <i class="fas fa-user"></i> My Blogs
+                </a>
+            </div>
+        </div>
+
+
+    <div class="container-fluid">
+
+   
+        <div class="mb-3">
+            <strong>Filter by Category:</strong>
+            <% categories.forEach(cat => { %>
+                <a href="/blog/view-all-blogs?category=<%= cat %>" class="btn btn-outline-primary btn-sm m-1">
+                    <%= cat %>
+                </a>
+            <% }) %>
+            <a href="/blog/view-all-blogs" class="btn btn-secondary btn-sm m-1">All</a>
+        </div>
+
+        <div class="row">
+            <% blogs.forEach(blog => { %>  
+                <div class="col-md-3 mx-3">
+                    <div class="card">
+                        <img src="<%= blog.image %>" class="card-img-top" height="200">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= blog.title %></h5>
+                            <p class="text-muted">By: <%= blog.author %></p>
+                            <p class="text-muted"><strong>Category:</strong> <%= blog.category %> || <strong>Language:</strong> <%= blog.language %></p>
+                            <p class="text-muted"><strong>Date:</strong> <%= new Date(blog.createdAt).toLocaleDateString() %></p>
+
+                            <!-- ✅ Fixed link -->
+                            <a href="/blog/single-blog/<%= blog._id %>" class="btn btn-info btn-sm">
+                                <i class="fas fa-eye"></i> Read More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+<%- include('footer') %>
