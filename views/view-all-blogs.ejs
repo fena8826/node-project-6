@@ -1,4 +1,144 @@
 <%- include('header') %>
+
+<style>
+
+.page-wrapper {
+    background: #f7f9fc;
+    min-height: 100vh;
+    padding: 30px 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.page-breadcrumb {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.page-title {
+    font-weight: 600;
+    color: #3a3a3a;
+    letter-spacing: 0.5px;
+}
+
+
+.btn {
+    transition: all 0.25s ease-in-out;
+    border-radius: 8px !important;
+}
+
+.btn-info {
+    background: linear-gradient(45deg, #00bcd4, #2196f3);
+    border: none;
+    color: #fff;
+}
+.btn-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(33, 150, 243, 0.3);
+}
+
+.btn-outline-primary {
+    border: 1px solid #7460ee;
+    color: #7460ee;
+}
+.btn-outline-primary:hover {
+    background-color: #7460ee;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #9e9e9e;
+    border: none;
+}
+.btn-secondary:hover {
+    background: #616161;
+    color: #fff;
+}
+
+
+.mb-3 strong {
+    font-size: 16px;
+    color: #333;
+    margin-right: 10px;
+}
+
+.mb-3 a {
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+
+.card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 30px rgba(116, 96, 238, 0.25);
+}
+
+.card-img-top {
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.card-body {
+    padding: 18px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.text-muted {
+    font-size: 13.5px;
+    color: #777 !important;
+}
+
+
+.btn-sm i {
+    margin-right: 4px;
+}
+
+a.btn.btn-sm {
+    box-shadow: 0 3px 8px rgba(116, 96, 238, 0.3);
+    border-radius: 10px;
+}
+a.btn.btn-sm:hover {
+    background-color: #5b49d9 !important;
+}
+
+
+@media (max-width: 768px) {
+    .page-breadcrumb {
+        text-align: center;
+    }
+
+    .col-md-3 {
+        margin: 15px auto;
+    }
+
+    .card {
+        width: 90%;
+    }
+}
+</style>
+
 <div class="page-wrapper">
     <div class="page-breadcrumb">
         <div class="row">
@@ -13,11 +153,9 @@
                 </a>
             </div>
         </div>
-
+    </div>
 
     <div class="container-fluid">
-
-   
         <div class="mb-3">
             <strong>Filter by Category:</strong>
             <% categories.forEach(cat => { %>
@@ -39,7 +177,6 @@
                             <p class="text-muted"><strong>Category:</strong> <%= blog.category %> || <strong>Language:</strong> <%= blog.language %></p>
                             <p class="text-muted"><strong>Date:</strong> <%= new Date(blog.createdAt).toLocaleDateString() %></p>
 
-                            <!-- ✅ Fixed link -->
                             <a href="/blog/single-blog/<%= blog._id %>" class="btn btn-info btn-sm">
                                 <i class="fas fa-eye"></i> Read More
                             </a>
@@ -50,4 +187,5 @@
         </div>
     </div>
 </div>
+
 <%- include('footer') %>

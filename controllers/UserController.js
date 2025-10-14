@@ -1,17 +1,12 @@
-
-
-
 const mongoose = require("mongoose");
 const User = require("../models/UserModel");
 const path = require("path");
 const fs = require("fs");
 
-
 exports.logout = async (req, res) => {
   res.clearCookie("user");
   return res.redirect("/");
 };
-
 
 exports.loginPage = async (req, res) => {
   if (req.cookies?.user?._id) return res.redirect("/dashboard");
@@ -89,7 +84,6 @@ exports.changePasswordPage = async (req, res) => {
   res.render("change_pass", { user });
 };
 
-
 exports.changePassword = async (req, res) => {
   try {
     const { old_password, password, c_password } = req.body;
@@ -136,11 +130,7 @@ exports.changePassword = async (req, res) => {
 
 
 exports.addUserPage = async (req, res) => {
-  if (
-    !req.cookies ||
-    !req.cookies.user ||
-    !req.cookies.user._id
-  ) {
+  if (!req.cookies?.user?._id) {
     return res.redirect("/");
   }
 
@@ -170,13 +160,10 @@ exports.viewAllUserPage = async (req, res) => {
   }
 };
 
-
 exports.addNewUser = async (req, res) => {
   try {
-    let imagePath = "";
     if (req.file) {
-      imagePath = `/uploads/${req.file.filename}`;
-      req.body.image = imagePath;
+      req.body.image = `/uploads/${req.file.filename}`;
     }
 
     await User.create(req.body);
@@ -189,7 +176,7 @@ exports.addNewUser = async (req, res) => {
 
 exports.editUserPage = async (req, res) => {
   try {
-    let user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
     if (user) {
       return res.render("edit_user", { user });
     } else {
@@ -203,41 +190,42 @@ exports.editUserPage = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    let user = await User.findById(req.params.id);
-    if (user) {
-      if (req.file) {
-        let oldPath = path.join(__dirname, "..", user.image || "");
-        try {
-          fs.unlinkSync(oldPath);
-        } catch {
-          console.log("Old image not found...");
-        }
+    const user = await User.findById(req.params.id);
 
+    if (user) {
+   
+      if (req.file) {
+        const oldPath = path.join(__dirname, "..", user.image || "");
+        if (fs.existsSync(oldPath)) {
+          try {
+            fs.unlinkSync(oldPath);
+          } catch {
+            console.log("Old image not found...");
+          }
+        }
         req.body.image = `/uploads/${req.file.filename}`;
       }
 
       await User.findByIdAndUpdate(user._id, req.body, { new: true });
+      console.log(" User updated successfully.");
       return res.redirect("/user/view-users");
     } else {
+      console.log("User not found.");
       return res.redirect("/user/view-users");
     }
   } catch (error) {
-    console.log(error);
+    console.log("Error updating user:", error);
   }
 };
 
-
-
-
 exports.deleteUser = async (req, res) => {
   try {
-    let id = req.params.id;
-    let user = await User.findById(id);
+    const id = req.params.id;
+    const user = await User.findById(id);
 
     if (user) {
-     
       if (user.image) {
-        let imagePath = path.join(__dirname, "..", user.image);
+        const imagePath = path.join(__dirname, "..", user.image);
         if (fs.existsSync(imagePath)) {
           try {
             fs.unlinkSync(imagePath);
@@ -248,12 +236,11 @@ exports.deleteUser = async (req, res) => {
         }
       }
 
-    
       await User.findByIdAndDelete(id);
-      console.log("User deleted successfully.");
+      console.log(" User deleted successfully.");
       return res.redirect("/user/view-users");
     } else {
-      console.log("User not found.");
+      console.log(" User not found.");
       return res.redirect("/user/view-users");
     }
   } catch (error) {

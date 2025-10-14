@@ -1,4 +1,105 @@
 <%- include('header') %>
+
+<style>
+
+body {
+    background: #f7f9fc;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.container {
+    padding-bottom: 60px;
+}
+.card {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 35px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 40px rgba(116, 96, 238, 0.2);
+}
+
+
+.card-img-top {
+    border-bottom: 3px solid #7460ee;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+.card:hover .card-img-top {
+    transform: scale(1.03);
+}
+
+
+.card-body {
+    padding: 25px 30px;
+}
+
+.card-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #444;
+    margin-top: 15px;
+}
+
+
+.text-muted {
+    color: #777 !important;
+    font-size: 14px;
+}
+
+.btn-secondary {
+    background: linear-gradient(45deg, #7460ee, #5b49d9);
+    border: none;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(116, 96, 238, 0.3);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(45deg, #5b49d9, #4a38c4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(116, 96, 238, 0.4);
+}
+
+.col-md-8 {
+    margin-top: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 22px;
+    }
+
+    .card-text {
+        font-size: 15px;
+    }
+
+    .card-img-top {
+        height: 250px !important;
+    }
+}
+</style>
+
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 offset-md-2">
@@ -8,7 +109,7 @@
                     <h2 class="card-title"><%= blog.title %></h2>
                     <p class="text-muted">By: <%= blog.author %> | <%= blog.createdAt.toDateString() %></p>
                     <p class="text-muted"><strong>Category:</strong> <%= blog.category %> || <strong>Language:</strong> <%= blog.language %></p>
-                            <p class="text-muted"><strong>Date:</strong> <%= new Date(blog.createdAt).toLocaleDateString() %></p>
+                    <p class="text-muted"><strong>Date:</strong> <%= new Date(blog.createdAt).toLocaleDateString() %></p>
                     <p class="card-text"><%= blog.content %></p>
                     <a href="/blog/view-all-blogs" class="btn btn-secondary">Back to Blogs</a>
                 </div>
@@ -16,4 +117,5 @@
         </div>
     </div>
 </div>
+
 <%- include('footer') %>
