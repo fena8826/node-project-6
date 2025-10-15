@@ -1,81 +1,198 @@
 <%- include('header') %>
-        <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Tables</h4>
-                        <div class="ml-auto text-right">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
+
+<style>
+/* 🌟 Custom Unique Styling */
+body {
+    background: linear-gradient(135deg, #f8f9fa, #e8f0fe);
+    font-family: 'Poppins', sans-serif;
+}
+
+.page-wrapper {
+    padding: 30px;
+}
+
+.card {
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: none;
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 22px;
+    color: #343a40;
+}
+
+.container h2 {
+    font-weight: 700;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.table thead th {
+    background: #343a40;
+    color: white;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+    border: none;
+}
+
+.table tbody tr {
+    background: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.table tbody tr:hover {
+    background: #f1f1f1;
+    transform: scale(1.01);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 12px 15px !important;
+}
+
+.table img {
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.table img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+}
+
+.table a i {
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.table a:hover i.fa-edit {
+    color: #007bff;
+}
+
+.table a:hover i.fa-trash {
+    color: #dc3545;
+}
+
+/* Breadcrumb Styling */
+.page-breadcrumb {
+    background: transparent;
+}
+
+.breadcrumb {
+    background: none;
+    font-size: 14px;
+}
+
+.breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: #495057;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+    .table tr {
+        margin-bottom: 15px;
+    }
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        text-align: left;
+        font-weight: 600;
+    }
+}
+</style>
+
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Tables</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title m-b-0">Admion Information</h5>
-                            </div>
-                           <div class="container">
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title m-b-0">Admin Information</h5>
+                    </div>
+                    <div class="container pb-4">
                         <h2>All Users</h2>
                         <table class="table">
                             <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Gender</th>
-                                <th>Hobbies</th>
-                            </tr>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Hobbies</th>
+                                    <th>Action</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <% users.forEach(user => { %>
                                 <tr>
-                                    <td><img src="<%= user.image ? user.image : '/assets/images/default-avatar.png' %>" width="50"/></td>
-                                    <td><%= user.firstname %> <%= user.lastname %></td>
-                                    <td><%= user.email %></td>
-                                    <td><%= user.gender %></td>
-                                    <td><%= user.hobbies.join(', ') %></td>
-                                    <td><a href="/user/edit-user/<%= user._id %>"><i class="fa fa-edit "></i></a> &nbsp; || &nbsp; <a href="/user/delete-user/<%= user._id %>"><i class="fa fa-trash"></i></a>
-                                          </td>
+                                    <td data-label="Image">
+                                        <img src="<%= user.image ? user.image : '/assets/images/default-avatar.png' %>" width="50"/>
+                                    </td>
+                                    <td data-label="Name"><%= user.firstname %> <%= user.lastname %></td>
+                                    <td data-label="Email"><%= user.email %></td>
+                                    <td data-label="Gender"><%= user.gender %></td>
+                                    <td data-label="Hobbies"><%= user.hobbies.join(', ') %></td>
+                                    <td data-label="Action">
+                                        <a href="/user/edit-user/<%= user._id %>" title="Edit"><i class="fa fa-edit text-primary"></i></a>
+                                        &nbsp; | &nbsp;
+                                        <a href="/user/delete-user/<%= user._id %>" title="Delete"><i class="fa fa-trash text-danger"></i></a>
+                                    </td>
                                 </tr>
                                 <% }) %>
-                             </tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>
-             </div>
             </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
+        </div>
+    </div>
+</div>
+
 <%- include('footer') %>

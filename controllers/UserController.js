@@ -17,10 +17,10 @@ exports.loginPage = async (req, res) => {
 exports.dashBoard = async (req, res) => {
   if (!req.cookies?.user?._id) {
     const user = {
-      _id: "admin123",
-      firstname: "Admin",
-      lastname: "User",
-      email: "admin@example.com",
+      _id: "",
+      firstname: "",
+      lastname: "",
+      email: "",
     };
     res.cookie("user", user);
     return res.render("dashboard", { user });
@@ -130,7 +130,9 @@ exports.changePassword = async (req, res) => {
 
 
 exports.addUserPage = async (req, res) => {
-  if (!req.cookies?.user?._id) {
+  if ( req.cookies == null ||
+    req.cookies.user == undefined ||
+    req.cookies.user._id == undefined) {
     return res.redirect("/");
   }
 

@@ -157,14 +157,7 @@ a.btn.btn-sm:hover {
 
     <div class="container-fluid">
         <div class="mb-3">
-            <strong>Filter by Category:</strong>
-            <% categories.forEach(cat => { %>
-                <a href="/blog/view-all-blogs?category=<%= cat %>" class="btn btn-outline-primary btn-sm m-1">
-                    <%= cat %>
-                </a>
-            <% }) %>
-            <a href="/blog/view-all-blogs" class="btn btn-secondary btn-sm m-1">All</a>
-        </div>
+          
 
         <div class="row">
             <% blogs.forEach(blog => { %>  
